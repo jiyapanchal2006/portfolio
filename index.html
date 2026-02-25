@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --color-1: #ff6b6b;
+            --color-2: #feca57;
+            --color-3: #48dbfb;
+            --color-4: #ff9ff3;
+            --color-5: #54a0ff;
+            --color-6: #5f27cd;
+            --dark: #2d3436;
+            --light: #f7f1e3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4), var(--color-5)) 1;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--color-1), var(--color-6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Dropdown Nav */
+        .nav-dropdown-wrapper {
+            position: relative;
+        }
+
+        .nav-toggle-btn {
+            background: var(--color-6);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(95, 39, 205, 0.3);
+        }
+
+        .nav-toggle-btn .arrow {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-toggle-btn.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            min-width: 180px;
+            border: 1px solid #f0f0f0;
+            animation: dropDown 0.25s ease;
+        }
+
+        .dropdown-menu.open {
+            display: block;
+        }
+
+        @keyframes dropDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: background 0.2s, padding-left 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-menu a:hover {
+            background: linear-gradient(90deg, rgba(255,107,107,0.08), rgba(255,159,243,0.08));
+            border-left-color: var(--color-1);
+            padding-left: 24px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #fff 50%, #f0f0f0 50%);
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .hero h1 span { color: var(--dark); }
+
+        .hero p {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--color-6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(95, 39, 205, 0.4);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-1), var(--color-4));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .about-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 20px;
+            line-height: 1.8;
+            border-left: 8px solid var(--color-3);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .skill-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-circle:hover { transform: scale(1.1) rotate(360deg); }
+        .skill-circle:nth-child(1) { background: var(--color-1); }
+        .skill-circle:nth-child(2) { background: var(--color-2); color: #333; }
+        .skill-circle:nth-child(3) { background: var(--color-3); }
+        .skill-circle:nth-child(4) { background: var(--color-4); color: #333; }
+        .skill-circle:nth-child(5) { background: var(--color-5); }
+        .skill-circle:nth-child(6) { background: var(--color-6); }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover { transform: translateY(-10px); }
+        .project-card:nth-child(1) { border-top: 5px solid var(--color-1); }
+        .project-card:nth-child(2) { border-top: 5px solid var(--color-3); }
+        .project-card:nth-child(3) { border-top: 5px solid var(--color-5); }
+
+        .project-header { padding: 20px; color: white; text-align: center; }
+        .project-card:nth-child(1) .project-header { background: var(--color-1); }
+        .project-card:nth-child(2) .project-header { background: var(--color-3); }
+        .project-card:nth-child(3) .project-header { background: var(--color-5); }
+
+        .project-body { padding: 20px; }
+        .project-body p { color: #666; margin-bottom: 15px; }
+
+        .project-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .project-btn:hover { background: var(--color-6); }
+
+        .contact-section {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+        }
+
+        .contact-form { max-width: 500px; margin: 0 auto; }
+
+        .form-group { margin-bottom: 25px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #eee;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-3);
+        }
+
+        .form-group .error {
+            color: var(--color-1);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, var(--color-1), var(--color-4));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .submit-btn:hover { transform: scale(1.02); }
+
+        .success-msg {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .feedback-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 3px dashed #ddd;
+        }
+
+        .feedback-section h3 { text-align: center; margin-bottom: 25px; color: var(--color-6); }
+
+        .feedback-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid;
+            animation: slideIn 0.5s ease;
+        }
+
+        .feedback-item:nth-child(odd) { border-left-color: var(--color-1); }
+        .feedback-item:nth-child(even) { border-left-color: var(--color-3); }
+        .feedback-item .name { font-weight: bold; color: var(--color-6); }
+        .feedback-item .email { color: #999; font-size: 14px; }
+        .feedback-item .message { margin-top: 10px; color: #555; }
+
+        .clear-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            background: var(--color-1);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .clear-btn:hover { background: #e74c3c; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer p { margin-bottom: 10px; }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover { background: var(--color-3); transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">✨ Jiya Panchal</div>
+
+            <!-- Dropdown Navigation -->
+            <div class="nav-dropdown-wrapper">
+                <button class="nav-toggle-btn" id="navToggle">
+                    ☰ Menu <span class="arrow">▾</span>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#home"> Home</a>
+                    <a href="#about"> About</a>
+                    <a href="#skills"> Skills</a>
+                    <a href="#projects"> Projects</a>
+                    <a href="#contact"> Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>
+            <span>J</span><span>i</span><span>y</span><span>a</span><span> </span><span>P</span><span>a</span><span>n</span><span>c</span><span>h</span><span>a</span><span>l</span>
+        </h1>
+        <p> Web Developer & Designer</p>
+        <a href="#projects" class="cta-btn">See My Work</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-box">
+            <p>Hey there! I'm a passionate web developer who loves creating amazing websites. I enjoy turning complex problems into simple, beautiful designs. When I'm not coding, you'll find me exploring new technologies, playing games, or drinking coffee! ☕</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+            <div class="skill-circle">HTML</div>
+            <div class="skill-circle">CSS</div>
+            <div class="skill-circle">JS</div>
+            <div class="skill-circle">React</div>
+            <div class="skill-circle">Node</div>
+            <div class="skill-circle">Git</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header"><h3>Portfolio Website</h3></div>
+                <div class="project-body">
+                    <p>A beautiful and responsive personal portfolio website with smooth animations and modern design.</p>
+                    
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header"><h3>E-Commerce Store</h3></div>
+                <div class="project-body">
+                    <p>A full-featured online store with shopping cart, payment integration, and admin panel.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact & Feedback</h2>
+        <div class="contact-section">
+            <form id="feedbackForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                    <span class="error" id="nameError">Please enter your name</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="text" id="email" placeholder="Enter your email">
+                    <span class="error" id="emailError">Please enter a valid email</span>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" rows="5" placeholder="Write your message here..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message ✉️</button>
+            </form>
+            <div class="success-msg" id="successMsg">🎉 Thank you! Your message has been sent successfully!</div>
+            <div class="feedback-section">
+                <h3>💬 Recent Messages</h3>
+                <div id="feedbackList">
+                    <p style="text-align: center; color: #999;">No messages yet. Be the first to say hello!</p>
+                </div>
+                <button class="clear-btn" id="clearBtn">Clear All</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Dropdown toggle
+        const navToggle = document.getElementById('navToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        navToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navToggle.classList.toggle('open');
+            dropdownMenu.classList.toggle('open');
+        });
+
+        // Close dropdown when clicking a link or outside
+        document.addEventListener('click', function() {
+            navToggle.classList.remove('open');
+            dropdownMenu.classList.remove('open');
+        });
+
+        dropdownMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('open');
+                dropdownMenu.classList.remove('open');
+            });
+        });
+
+        // Form logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('feedbackForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const successMsg = document.getElementById('successMsg');
+            const feedbackList = document.getElementById('feedbackList');
+            const clearBtn = document.getElementById('clearBtn');
+
+            loadFeedback();
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                nameError.style.display = 'none';
+                emailError.style.display = 'none';
+                successMsg.style.display = 'none';
+                let isValid = true;
+
+                if (nameInput.value.trim() === '') { nameError.style.display = 'block'; isValid = false; }
+
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailInput.value.trim())) { emailError.style.display = 'block'; isValid = false; }
+
+                if (isValid) {
+                    const feedback = {
+                        name: nameInput.value,
+                        email: emailInput.value,
+                        message: messageInput.value,
+                        date: new Date().toLocaleDateString()
+                    };
+                    saveFeedback(feedback);
+                    successMsg.style.display = 'block';
+                    form.reset();
+                    loadFeedback();
+                    setTimeout(() => { successMsg.style.display = 'none'; }, 3000);
+                }
+            });
+
+            function saveFeedback(feedback) {
+                let feedbacks = JSON.parse(localStorage.getItem('myFeedbacks')) || [];
+                feedbacks.push(feedback);
+                localStorage.setItem('myFeedbacks', JSON.stringify(feedbacks));
+            }
+
+            function loadFeedback() {
+                let feedbacks = JSON.parse(localStorage.getItem('myFeedbacks')) || [];
+                feedbackList.innerHTML = '';
+                if (feedbacks.length === 0) {
+                    feedbackList.innerHTML = '<p style="text-align: center; color: #999;">No messages yet. Be the first to say hello!</p>';
+                    return;
+                }
+                for (let i = feedbacks.length - 1; i >= 0; i--) {
+                    const fb = feedbacks[i];
+                    const div = document.createElement('div');
+                    div.className = 'feedback-item';
+                    div.innerHTML = '<span class="name">' + fb.name + '</span> <span class="email">(' + fb.email + ')</span><p class="message">' + fb.message + '</p>';
+                    feedbackList.appendChild(div);
+                }
+            }
+
+            clearBtn.addEventListener('click', function() {
+                localStorage.removeItem('myFeedbacks');
+                loadFeedback();
+            });
+        });
+    </script>
+</body>
+</html>
